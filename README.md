@@ -54,8 +54,8 @@ Link to Dataset: https://www.kaggle.com/datasets/willianoliveiragibin/type-of-th
 
 | **Phase**  | **Task**                    | **Duration** |
 |------------|-----------------------------|--------------|
-| **Phase 1**: Setup |                     |  Week 1      |
-| **Phase 2**: EDA |                   |  Week 2      |
-| **Phase 3**: Model |                  |  Week 3 & 4      |
-| **Phase 4**: Deployment |                |  Week 5      |
+| **Phase 1**: | Setup                    |  Week 1      |
+| **Phase 2**: | EDA                  |  Week 2      |
+| **Phase 3**: | Model                 |  Week 3 & 4      |
+| **Phase 4**: | Deployment               |  Week 5      |
 
