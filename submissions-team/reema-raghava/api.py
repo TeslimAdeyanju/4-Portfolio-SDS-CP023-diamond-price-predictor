@@ -5,8 +5,8 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 
 model = joblib.load('model/PricePredictor.pkl')
-sc = joblib.load('model/StandardScaler.pkl')
-oe = joblib.load('model/OrdinalEncoder.pkl')
+sc = joblib.load('model/StdScaler.pkl')
+oe = joblib.load('model/OrdEncoder.pkl')
 
 app = FastAPI(
     title = 'Diamond Price Predictor API',
