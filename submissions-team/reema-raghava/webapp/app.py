@@ -8,7 +8,7 @@ import requests
 st.set_page_config(layout="wide")  # Optional: Set layout
 
 # Define the path to config.toml in the subfolder
-config_path = "submissions-team/reema-raghava/webapp/.streamlit/config.toml"
+config_path = "./submissions-team/reema-raghava/webapp/.streamlit/config.toml"
 
 # Check if the config file exists
 if os.path.exists(config_path):
@@ -23,6 +23,8 @@ if os.path.exists(config_path):
         background_color = theme.get("backgroundColor", "#ffffff")
         secondary_background_color = theme.get("secondaryBackgroundColor", "#f0f2f6")
         text_color = theme.get("textColor", "#000000")
+
+        st.write("primary color from theme:", theme.get("primaryColor"))
 
         st.write("primary_color:", primary_color)
 
