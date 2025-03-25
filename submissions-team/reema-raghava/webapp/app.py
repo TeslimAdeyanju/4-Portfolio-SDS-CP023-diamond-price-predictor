@@ -18,6 +18,8 @@ load_dotenv()
 # Get the BASE_URL from the environment variables
 base_url = os.getenv("BASE_URL", "http://localhost:8000")
 
+st.write(st.config.get_option("theme.primaryColor"))
+
 # Streamlit app title and description
 st.title("Diamond Price Prediction")
 st.write("Enter the values for each feature to predict if the tumor is benign or malignant.")
