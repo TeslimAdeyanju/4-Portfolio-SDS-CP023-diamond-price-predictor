@@ -24,6 +24,8 @@ if os.path.exists(config_path):
         secondary_background_color = theme.get("secondaryBackgroundColor", "#f0f2f6")
         text_color = theme.get("textColor", "#000000")
 
+        st.write("primary_color:", primary_color)
+
         # Apply theme dynamically using custom CSS
         st.markdown(
             f"""
