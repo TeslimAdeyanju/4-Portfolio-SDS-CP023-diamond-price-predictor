@@ -68,7 +68,6 @@ os.chdir("./submissions-team/reema-raghava/webapp")
 st.write(os.getcwd())
 st.write(os.listdir())
 st.write(os.listdir("./.streamlit"))
-st.write(os.listdir("./.streamlit/config.toml"))
 
 st.write("Primary Color:", st.config.get_option("theme.primaryColor"))
 
