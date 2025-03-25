@@ -14,8 +14,8 @@ st.write(os.listdir("./.streamlit"))
 os.environ["STREAMLIT_CONFIG_FILE"] = "./submissions-team/reema-raghava/webapp/.streamlit/config.toml"
 
 # Check if config file exists
-print("File Exists:", os.path.exists(os.environ["STREAMLIT_CONFIG_FILE"]))
-print("Absolute Path:", os.path.abspath(os.environ["STREAMLIT_CONFIG_FILE"]))
+st.write("File Exists:", os.path.exists(os.environ["STREAMLIT_CONFIG_FILE"]))
+st.write("Absolute Path:", os.path.abspath(os.environ["STREAMLIT_CONFIG_FILE"]))
 
 # Check theme values
 st.write("Primary Color:", st.config.get_option("theme.primaryColor"))
