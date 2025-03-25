@@ -5,6 +5,14 @@ import requests
 #from streamlit_extras.let_it_rain import rain
 
 # load environment variables from .env file
+os.environ["STREAMLIT_CONFIG_FILE"] = "./.streamlit/config.toml"
+
+# Check if config file exists
+st.write("Config File Exists:", os.path.exists("./.streamlit/config.toml"))
+
+# Check theme values
+st.write("Primary Color:", st.config.get_option("theme.primaryColor"))
+
 load_dotenv()
 
 # Get the BASE_URL from the environment variables
