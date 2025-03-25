@@ -1,6 +1,6 @@
 import joblib
 import numpy as np
-import uvicorn
+
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -12,6 +12,10 @@ app = FastAPI(
     description = 'An API for predicting price of a diamond based on its various attributes using XGBoost',
     version = '1.0.0'
 )
+
+@app.get("/")
+def read_root():
+    return {"message": "Hello from FastAPI on Render!"}
 
 # Define the input data structure
 class DiamondData(BaseModel):
@@ -75,6 +79,5 @@ def predict(input_data: DiamondData):
     
     return {"prediction": float(prediction[0])}
     
-
 
 
