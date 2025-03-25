@@ -7,18 +7,15 @@ import requests
 
 st.set_page_config(layout="wide")  # Optional: Set layout
 
-# Define correct paths
-custom_config_path = "./submissions-team/reema-raghava/webapp/.streamlit/config.toml"
-default_config_path = os.path.expanduser("~/.streamlit/config.toml")
+# Manually set the config path
+config_path = os.path.abspath("./submissions-team/reema-raghava/webapp/.streamlit/config.toml")
+os.environ["STREAMLIT_CONFIG_FILE"] = config_path
 
-# Ensure ~/.streamlit directory exists
-os.makedirs(os.path.dirname(default_config_path), exist_ok=True)
+# Check if Streamlit detects the config file
+st.write("Config File Exists:", os.path.exists(config_path))
 
-# Copy the config file to Streamlit's default location
-shutil.copy(custom_config_path, default_config_path)
-
-
-st.write("Primary Color:", st.config.get_option("theme.primaryColor"))
+# Print primary color to verify
+st.write("Streamlit Primary Color:", st.config.get_option("theme.primaryColor"))
 
 
 
