@@ -1,14 +1,11 @@
 import os
+import toml
 from dotenv import load_dotenv
 import streamlit as st
 import requests
 #from streamlit_extras.let_it_rain import rain
 
 st.set_page_config(layout="wide")  # Optional: Set layout
-
-st.write(os.listdir("./"))
-st.write(os.listdir("./.streamlit"))
-
 
 # load environment variables from .env file
 os.environ["STREAMLIT_CONFIG_FILE"] = "./submissions-team/reema-raghava/webapp/.streamlit/config.toml"
@@ -17,8 +14,15 @@ os.environ["STREAMLIT_CONFIG_FILE"] = "./submissions-team/reema-raghava/webapp/.
 st.write("File Exists:", os.path.exists(os.environ["STREAMLIT_CONFIG_FILE"]))
 st.write("Absolute Path:", os.path.abspath(os.environ["STREAMLIT_CONFIG_FILE"]))
 
-# Check theme values
-st.write("Primary Color:", st.config.get_option("theme.primaryColor"))
+# Manually load the config file
+config_path = os.environ["STREAMLIT_CONFIG_FILE"]
+with open(config_path, "r") as f:
+    config = toml.load(f)
+
+st.write("Manually Loaded Primary Color:", config.get("theme", {}).get("primaryColor"))
+
+# Streamlit's built-in check
+st.write("Streamlit Primary Color:", st.config.get_option("theme.primaryColor"))
 
 load_dotenv()
 
