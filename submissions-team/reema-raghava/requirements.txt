@@ -13,5 +13,8 @@ dash-bootstrap-components==1.7.1
 # Machine Learning
 scikit-learn==1.6.1
 xgboost==3.0.0 # Need to install libopm for Mac using cmd 'brew install libopm'
-catboost==1.2.7
 optuna==4.2.1
+joblib>=1.4.2
+# API
+uvicorn>=0.32.0
+fastapi>=0.115.4
