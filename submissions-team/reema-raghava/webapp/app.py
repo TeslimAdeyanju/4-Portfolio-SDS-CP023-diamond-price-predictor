@@ -63,13 +63,19 @@ st.write(os.listdir("./.streamlit"))
 # else:
 #     st.write("⚠️ Config file not found at:", config_path)
 
-os.chdir("./submissions-team/reema-raghava/webapp")
+# Set the environment variable for Streamlit to load the correct config file
+os.environ["STREAMLIT_CONFIG_FILE"] = os.path.abspath("./.streamlit/config.toml")
 
-st.write(os.getcwd())
-st.write(os.listdir())
-st.write(os.listdir("./.streamlit"))
+# Print current directory and check files
+st.write("Current Working Directory:", os.getcwd())
+st.write("Files in CWD:", os.listdir())
+st.write("Streamlit Config Exists:", os.path.exists("./.streamlit/config.toml"))
 
-st.write("Primary Color:", st.config.get_option("theme.primaryColor"))
+# Force Streamlit to reload configuration
+st._config._load_config()
+
+# Check if theme is now applied
+st.write("Primary Color (After Reload):", st.config.get_option("theme.primaryColor"))
 
 
 load_dotenv()
