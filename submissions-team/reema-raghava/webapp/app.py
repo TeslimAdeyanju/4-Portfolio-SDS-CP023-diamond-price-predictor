@@ -7,6 +7,9 @@ import requests
 
 st.set_page_config(layout="wide")  # Optional: Set layout
 
+st.write(os.listdir("./"))
+st.write(os.listdir("./.streamlit"))
+
 # Define the path to config.toml in the subfolder
 config_path = "./submissions-team/reema-raghava/webapp/.streamlit/config.toml"
 
