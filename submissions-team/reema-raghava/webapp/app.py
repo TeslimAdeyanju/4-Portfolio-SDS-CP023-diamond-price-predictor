@@ -11,58 +11,66 @@ st.write(os.listdir("./"))
 st.write(os.listdir("./.streamlit"))
 
 # Define the path to config.toml in the subfolder
-config_path = "./submissions-team/reema-raghava/webapp/.streamlit/config.toml"
+# config_path = "./submissions-team/reema-raghava/webapp/.streamlit/config.toml"
 
-# Check if the config file exists
-if os.path.exists(config_path):
-    # Load the config file manually
-    with open(config_path, "r") as f:
-        config = toml.load(f)
+# # Check if the config file exists
+# if os.path.exists(config_path):
+#     # Load the config file manually
+#     with open(config_path, "r") as f:
+#         config = toml.load(f)
 
-    # Extract theme settings if available
-    if "theme" in config:
-        theme = config["theme"]
-        primary_color = theme.get("primaryColor", "#4b56ff")  # Default if not found
-        background_color = theme.get("backgroundColor", "#ffffff")
-        secondary_background_color = theme.get("secondaryBackgroundColor", "#f0f2f6")
-        text_color = theme.get("textColor", "#000000")
+#     # Extract theme settings if available
+#     if "theme" in config:
+#         theme = config["theme"]
+#         primary_color = theme.get("primaryColor", "#4b56ff")  # Default if not found
+#         background_color = theme.get("backgroundColor", "#ffffff")
+#         secondary_background_color = theme.get("secondaryBackgroundColor", "#f0f2f6")
+#         text_color = theme.get("textColor", "#000000")
 
-        st.write("primary color from theme:", theme.get("primaryColor"))
+#         st.write("primary color from theme:", theme.get("primaryColor"))
 
-        st.write("primary_color:", primary_color)
+#         st.write("primary_color:", primary_color)
 
-        # Apply theme dynamically using custom CSS
-        st.markdown(
-            f"""
-            <style>
-                :root {{
-                    --primary-color: {primary_color};
-                    --background-color: {background_color};
-                    --secondary-background-color: {secondary_background_color};
-                    --text-color: {text_color};
-                }}
-                body {{
-                    background-color: var(--background-color) !important;
-                    color: var(--text-color) !important;
-                }}
-                .stButton>button {{
-                    background-color: var(--primary-color) !important;
-                    color: white !important;
-                }}
-                .stSidebar {{
-                    background-color: var(--secondary-background-color) !important;
-                }}
-            </style>
-            """,
-            unsafe_allow_html=True,
-        )
+#         # Apply theme dynamically using custom CSS
+#         st.markdown(
+#             f"""
+#             <style>
+#                 :root {{
+#                     --primary-color: {primary_color};
+#                     --background-color: {background_color};
+#                     --secondary-background-color: {secondary_background_color};
+#                     --text-color: {text_color};
+#                 }}
+#                 body {{
+#                     background-color: var(--background-color) !important;
+#                     color: var(--text-color) !important;
+#                 }}
+#                 .stButton>button {{
+#                     background-color: var(--primary-color) !important;
+#                     color: white !important;
+#                 }}
+#                 .stSidebar {{
+#                     background-color: var(--secondary-background-color) !important;
+#                 }}
+#             </style>
+#             """,
+#             unsafe_allow_html=True,
+#         )
 
-        st.write("✅ Custom theme applied successfully!")
-    else:
-        st.write("⚠️ Theme section not found in config.toml")
-else:
-    st.write("⚠️ Config file not found at:", config_path)
+#         st.write("✅ Custom theme applied successfully!")
+#     else:
+#         st.write("⚠️ Theme section not found in config.toml")
+# else:
+#     st.write("⚠️ Config file not found at:", config_path)
 
+os.chdir("./submissions-team/reema-raghava/webapp")
+
+st.write(os.getcwd())
+st.write(os.listdir())
+st.write(os.listdir("./.streamlit"))
+st.write(os.listdir("./.streamlit/config.toml"))
+
+st.write("Primary Color:", st.config.get_option("theme.primaryColor"))
 
 
 load_dotenv()
