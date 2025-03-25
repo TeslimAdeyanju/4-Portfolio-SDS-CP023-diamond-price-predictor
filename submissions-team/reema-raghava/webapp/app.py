@@ -4,6 +4,12 @@ import streamlit as st
 import requests
 #from streamlit_extras.let_it_rain import rain
 
+st.write(os.listdir("./"))
+st.write(os.listdir("./.streamlit"))
+
+st.write(os.path.abspath("./.streamlit/config.toml"))
+st.write(os.path.exists(os.path.abspath("./.streamlit/config.toml")))
+
 # load environment variables from .env file
 os.environ["STREAMLIT_CONFIG_FILE"] = "./.streamlit/config.toml"
 
