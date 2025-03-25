@@ -1,82 +1,10 @@
 import os
-import toml
 from dotenv import load_dotenv
 import streamlit as st
 import requests
-#from streamlit_extras.let_it_rain import rain
+from streamlit_extras.let_it_rain import rain
 
 st.set_page_config(layout="wide")  # Optional: Set layout
-
-st.write(os.listdir("./"))
-st.write(os.listdir("./.streamlit"))
-
-# Define the path to config.toml in the subfolder
-# config_path = "./submissions-team/reema-raghava/webapp/.streamlit/config.toml"
-
-# # Check if the config file exists
-# if os.path.exists(config_path):
-#     # Load the config file manually
-#     with open(config_path, "r") as f:
-#         config = toml.load(f)
-
-#     # Extract theme settings if available
-#     if "theme" in config:
-#         theme = config["theme"]
-#         primary_color = theme.get("primaryColor", "#4b56ff")  # Default if not found
-#         background_color = theme.get("backgroundColor", "#ffffff")
-#         secondary_background_color = theme.get("secondaryBackgroundColor", "#f0f2f6")
-#         text_color = theme.get("textColor", "#000000")
-
-#         st.write("primary color from theme:", theme.get("primaryColor"))
-
-#         st.write("primary_color:", primary_color)
-
-#         # Apply theme dynamically using custom CSS
-#         st.markdown(
-#             f"""
-#             <style>
-#                 :root {{
-#                     --primary-color: {primary_color};
-#                     --background-color: {background_color};
-#                     --secondary-background-color: {secondary_background_color};
-#                     --text-color: {text_color};
-#                 }}
-#                 body {{
-#                     background-color: var(--background-color) !important;
-#                     color: var(--text-color) !important;
-#                 }}
-#                 .stButton>button {{
-#                     background-color: var(--primary-color) !important;
-#                     color: white !important;
-#                 }}
-#                 .stSidebar {{
-#                     background-color: var(--secondary-background-color) !important;
-#                 }}
-#             </style>
-#             """,
-#             unsafe_allow_html=True,
-#         )
-
-#         st.write("✅ Custom theme applied successfully!")
-#     else:
-#         st.write("⚠️ Theme section not found in config.toml")
-# else:
-#     st.write("⚠️ Config file not found at:", config_path)
-
-# Set the environment variable for Streamlit to load the correct config file
-os.environ["STREAMLIT_CONFIG_FILE"] = os.path.abspath("./.streamlit/config.toml")
-
-# Print current directory and check files
-st.write("Current Working Directory:", os.getcwd())
-st.write("Files in CWD:", os.listdir())
-st.write("Streamlit Config Exists:", os.path.exists("./.streamlit/config.toml"))
-
-# Force Streamlit to reload configuration
-#st._config._load_config()
-
-# Check if theme is now applied
-st.write("Primary Color (After Reload):", st.config.get_option("theme.primaryColor"))
-
 
 load_dotenv()
 
@@ -121,7 +49,7 @@ if st.button("Predict"):
         # st.write(f"The prediction is {prediction['label']} (Class: {prediction['prediction']})")
         st.success(f"Predicted price: {result['prediction']}",
                    icon=":material/thumb_up:")
-        #rain(emoji="🎈", font_size=54, falling_speed=5, animation_length="infinite", )
+        rain(emoji="💎", font_size=30, falling_speed=5, animation_length=1, )
     else:
         print(response)
         st.write("Error: Could not retrieve prediction. Please try again.")
