@@ -4,17 +4,18 @@ import streamlit as st
 import requests
 #from streamlit_extras.let_it_rain import rain
 
+st.set_page_config(layout="wide")  # Optional: Set layout
+
 st.write(os.listdir("./"))
 st.write(os.listdir("./.streamlit"))
 
-st.write(os.path.abspath("./.streamlit/config.toml"))
-st.write(os.path.exists(os.path.abspath("./.streamlit/config.toml")))
 
 # load environment variables from .env file
-os.environ["STREAMLIT_CONFIG_FILE"] = "./.streamlit/config.toml"
+os.environ["STREAMLIT_CONFIG_FILE"] = "./submissions-team/reema-raghava/webapp/.streamlit/config.toml"
 
 # Check if config file exists
-st.write("Config File Exists:", os.path.exists("./.streamlit/config.toml"))
+print("File Exists:", os.path.exists(os.environ["STREAMLIT_CONFIG_FILE"]))
+print("Absolute Path:", os.path.abspath(os.environ["STREAMLIT_CONFIG_FILE"]))
 
 # Check theme values
 st.write("Primary Color:", st.config.get_option("theme.primaryColor"))
