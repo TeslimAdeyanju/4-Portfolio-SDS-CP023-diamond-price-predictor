@@ -72,7 +72,7 @@ st.write("Files in CWD:", os.listdir())
 st.write("Streamlit Config Exists:", os.path.exists("./.streamlit/config.toml"))
 
 # Force Streamlit to reload configuration
-st._config._load_config()
+#st._config._load_config()
 
 # Check if theme is now applied
 st.write("Primary Color (After Reload):", st.config.get_option("theme.primaryColor"))
