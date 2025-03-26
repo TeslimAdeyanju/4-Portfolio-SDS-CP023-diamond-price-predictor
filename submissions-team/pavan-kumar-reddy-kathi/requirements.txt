@@ -1,0 +1,14 @@
+# Contains all libraries that are needed for this project
+# pandas 2.2.3
+
+pandas~=2.2.3
+scipy~=1.15.2
+matplotlib~=3.10.1
+seaborn~=0.13.2
+scikit-learn~=1.6.1
+pyyaml~=6.0.2
+numpy~=2.2.3
+-e ./dpputility
+dpputility~=0.1.0
+xgboost~=3.0.0
+setuptools~=75.8.0
