@@ -1,9 +1,16 @@
-from dpputility import data_set_module as dsm
+import os
+
+import pandas as pd
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split, KFold, cross_val_score
+from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import r2_score
+
+from dpputility.json_module import perform_tuning
+from dpputility import (data_set_module as dsm,
+                        config_module as cm, metrics_module as mm)
+
+pd.set_option('display.max_columns', None)
 
 # Load data set
 dataset = dsm.get_data_frame()
@@ -28,33 +35,25 @@ X_train = column_transformer_object.fit_transform(X_train)
 # y_train = standard_scaler_y.fit_transform(y_train.reshape(-1,1)).flatten()
 # print(y_train)
 
+# Perform tuning using GridSearchCV and save results
+path_to_save = cm.get_tuning_result_file_path(os.path.abspath('../'),
+                                              'linear_regression.json')
+
+grid_search_cv = perform_tuning(LinearRegression(), [{}],
+                        X_train, y_train, path_to_save)
+
+print(mm.calculate_grid_search_cv_metrics(grid_search_cv.cv_results_))
+
 # Train the Model
 model = LinearRegression()
 model.fit(X_train, y_train)
 
-# Perform predictions
-y_predict = model.predict(column_transformer_object.transform(X_test))
-# y_predict = standard_scaler_y.inverse_transform(y_predict.reshape(-1,1)).flatten()
+# Inference
+y_test_predicted = model.predict(column_transformer_object.transform(X_test))
+# y_test_predicted = standard_scaler_y.inverse_transform(y_test_predicted.reshape(-1,1)).flatten()
+y_train_predicted = model.predict(X_train)
 
-# calculate r2 score
-print(r2_score(y_test, y_predict))
-
-# calculate adjusted r2 score
-n = len(y_test)
-print(1- ((1-r2_score(y_test, y_predict))*((n-1)/(n-1-9))))
-
-# without applying Standard Scaler to y
-# 0.9121553119762901 - R2
-# 0.9120819314126912 - Adjusted R2
-
-# Applying Standard Scaler to y
-# 0.9121553119762901 - R2
-# 0.9120819314126912 - Adjusted R2
-
-# K fold cross validation
-k_fold = KFold(n_splits=10, shuffle=True)
-accuracies = cross_val_score(model, X_train, y_train, cv=k_fold, scoring='r2', n_jobs=-1)
-print(accuracies)
-print(accuracies.mean()) #0.9011613882692473 (no scaling to y) 0.9012567630086693(scaling applied to y)
+# display model metrics
+print(mm.calculate_model_metrics(y_train, y_test, y_train_predicted, y_test_predicted, (X_test.shape[1])))
 
 

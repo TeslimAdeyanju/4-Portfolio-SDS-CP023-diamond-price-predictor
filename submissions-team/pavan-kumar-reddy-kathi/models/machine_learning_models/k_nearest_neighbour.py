@@ -1,10 +1,16 @@
+import os
+
+import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler
-
-from dpputility import data_set_module as dsm
-from sklearn.model_selection import train_test_split, cross_val_score, KFold
-from sklearn.metrics import r2_score
+from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsRegressor
+
+from dpputility import (data_set_module as dsm,
+                        config_module as cm, metrics_module as mm)
+from dpputility.json_module import perform_tuning
+
+pd.set_option('display.max_columns', None)
 
 # Load data set
 dataset = dsm.get_data_frame()
@@ -22,24 +28,27 @@ categorical_features = [6, 7, 8]
 
 # Define transformer for numerical features
 standard_scaler_transformer = StandardScaler()
-# standard_scaler_y = StandardScaler()
+
 column_transformer_object = ColumnTransformer(transformers=[('numerical',standard_scaler_transformer,numerical_features),
                                                             ('categorical','passthrough',categorical_features)])
 X_train = column_transformer_object.fit_transform(X_train)
+
+# Perform tuning using GridSearchCV and save results
+path_to_save = cm.get_tuning_result_file_path(os.path.abspath('../'),
+                                              'knn.json')
+
+grid_search_cv = perform_tuning(KNeighborsRegressor(n_neighbors=10, weights='distance'), [{}],
+                        X_train, y_train, path_to_save)
+
+print(mm.calculate_grid_search_cv_metrics(grid_search_cv.cv_results_))
 
 # Build and train model
 model = KNeighborsRegressor(n_neighbors=10, weights='distance')
 model.fit(X_train, y_train)
 
-y_predict = model.predict(column_transformer_object.transform(X_test))
+# Inference
+y_test_predicted = model.predict(column_transformer_object.transform(X_test))
+y_train_predicted = model.predict(X_train)
 
-print(r2_score(y_test, y_predict)) #0.9730994634942931
-
-n = len(y_test)
-print(1- ((1-r2_score(y_test, y_predict))*((n-1)/(n-1-9)))) #0.9730769922831782
-
-# K fold cross validation
-k_fold = KFold(n_splits=10, shuffle=True)
-accuracies = cross_val_score(model, X_train, y_train, cv=k_fold, scoring='r2', n_jobs=-1)
-print(accuracies)
-print(accuracies.mean()) #0.9713804811855878
+# display model metrics
+print(mm.calculate_model_metrics(y_train, y_test, y_train_predicted, y_test_predicted, (X_test.shape[1])))

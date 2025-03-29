@@ -1,9 +1,16 @@
-from dpputility import data_set_module as dsm
+import os
+
+import pandas as pd
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split, KFold, cross_val_score
+from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
-from sklearn.metrics import r2_score
-from sklearn.svm import LinearSVR,SVR
+from sklearn.svm import LinearSVR
+
+from dpputility.json_module import perform_tuning
+from dpputility import (data_set_module as dsm,
+                        config_module as cm, metrics_module as mm)
+
+pd.set_option('display.max_columns', None)
 
 # Load data set
 dataset = dsm.get_data_frame()
@@ -26,23 +33,24 @@ column_transformer_object = ColumnTransformer(transformers=[('numerical',standar
                                                             ('categorical','passthrough',categorical_features)])
 X_train = column_transformer_object.fit_transform(X_train)
 
+# Perform tuning using GridSearchCV and save results
+path_to_save = cm.get_tuning_result_file_path(os.path.abspath('../'),
+                                              'linear_svr.json')
+
+grid_search_cv = perform_tuning(LinearSVR(), [{}],
+                        X_train, y_train, path_to_save)
+
+print(mm.calculate_grid_search_cv_metrics(grid_search_cv.cv_results_))
+
 # Train Model
 model = LinearSVR()
 model.fit(X_train, y_train)
 
-# Perform predictions
-y_predict = model.predict(column_transformer_object.transform(X_test))
+# Inference
+y_test_predicted = model.predict(column_transformer_object.transform(X_test))
+y_train_predicted = model.predict(X_train)
 
-# calculate r2 score
-print(r2_score(y_test, y_predict)) #0.8747595867077493
+# display model metrics
+print(mm.calculate_model_metrics(y_train, y_test, y_train_predicted, y_test_predicted, (X_test.shape[1])))
 
-# calculate adjusted r2 score
-n = len(y_test)
-print(1- ((1-r2_score(y_test, y_predict))*((n-1)/(n-1-9)))) #0.8746549678364267
-
-# K fold cross validation
-k_fold = KFold(n_splits=10, shuffle=True)
-accuracies = cross_val_score(model, X_train, y_train, cv=k_fold, scoring='r2', n_jobs=-1)
-print(accuracies)
-print(accuracies.mean())  #0.8676067363801101
 

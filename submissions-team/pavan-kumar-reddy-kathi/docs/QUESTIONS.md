@@ -32,3 +32,5 @@
 31. Explain Eigen values and Eigen vectors in context of correlation between features
 32. how to choose between PCA linear Vs Kernel
 33. How do i know whether a given feature is really contributing to Model prediction or not
+34. how do i ensure my regression model is not overfitted
+35. for regression what metrics helps to find whether my model is overfitted?
