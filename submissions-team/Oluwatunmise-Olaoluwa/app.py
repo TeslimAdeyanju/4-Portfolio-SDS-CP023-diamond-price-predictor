@@ -65,9 +65,9 @@ color = st.sidebar.selectbox("Color (Diamond Tint Level)", list(color_options.ke
 clarity = st.sidebar.selectbox("Clarity (Diamond Purity Level)", list(clarity_options.keys()))
 depth = st.sidebar.slider("Depth (%) (Total Height of Diamond)", 50.0, 75.0, 61.5)
 table = st.sidebar.slider("Table (%) (Top Surface Width of Diamond)", 50.0, 75.0, 57.0)
-x = st.sidebar.slider("X (Length in mm)", 3.0, 10.0, 5.5)
-y = st.sidebar.slider("Y (Width in mm)", 3.0, 10.0, 5.5)
-z = st.sidebar.slider("Z (Depth in mm - Height from Top to Bottom)", 2.0, 6.0, 3.5)
+x = st.sidebar.slider("X (Length mm)", 3.0, 10.0, 5.5)
+y = st.sidebar.slider("Y (Width mm)", 3.0, 10.0, 5.5)
+z = st.sidebar.slider("Z (Depth mm - Height from Top to Bottom)", 2.0, 6.0, 3.5)
 
 # Convert categorical features to numeric (you need to use the same encoding as in training)
 cut_mapping = {"Fair": 0, "Good": 1, "Very Good": 2, "Premium": 3, "Ideal": 4}
