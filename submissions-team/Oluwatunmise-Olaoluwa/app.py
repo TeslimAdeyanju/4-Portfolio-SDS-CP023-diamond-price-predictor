@@ -1,5 +1,5 @@
 import streamlit as st
-import pickle
+import joblib
 import numpy as np
 import pandas as pd
 
@@ -24,9 +24,9 @@ class EnsembleModel:
         return ensemble_preds
 
 
-# Load the trained model
-with open("diamond_price_model.pkl", "rb") as file:
-    model = pickle.load(file)
+# Load the trained model using Joblib
+model_filename = "diamond_price_model.joblib"
+model = joblib.load(model_filename)
 
 
 # Define the app title
