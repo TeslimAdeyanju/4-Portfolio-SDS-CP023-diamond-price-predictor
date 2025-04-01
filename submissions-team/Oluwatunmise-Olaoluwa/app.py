@@ -43,7 +43,7 @@ model = joblib.load(model_filename)
 st.title("💎 Diamond Price Predictor")
 
 # Load and display the image
-image_path =  "/Users/olaoluwatunmise/Diamond-Price-Predictor/SDS-CP023-diamond-price-predictor/submissions-team/Oluwatunmise-Olaoluwa/Diamond.jpg" #"/mnt/data/viktor-mindt-4yWWIEKOBaU-unsplash.jpg"
+image_path =  "submissions-team/Oluwatunmise-Olaoluwa/Diamond.jpg" #"/mnt/data/viktor-mindt-4yWWIEKOBaU-unsplash.jpg"
 image = Image.open(image_path)
 st.image(image, use_container_width=True)  # ✅ Fixed deprecated parameter
 
