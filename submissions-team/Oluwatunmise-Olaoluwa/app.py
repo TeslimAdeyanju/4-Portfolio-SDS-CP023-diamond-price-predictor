@@ -36,7 +36,7 @@ class EnsembleModel:
 
 
 # Load the trained model
-model_filename = "submissions-team/Oluwatunmise-Olaoluwa/diamond_price_model.joblib"
+model_filename = "diamond_price_model.joblib"
 model = joblib.load(model_filename)
 
 # Set up the app title
