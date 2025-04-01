@@ -6,7 +6,7 @@ from PIL import Image
 
 
 # Define the dataset path
-dataset_path = "/Users/olaoluwatunmise/Diamond-Price-Predictor/SDS-CP023-diamond-price-predictor/submissions-team/Oluwatunmise-Olaoluwa/type-of-the-Diamond.csv"
+dataset_path = "submissions-team/Oluwatunmise-Olaoluwa/type-of-the-Diamond.csv"
 
 # Load the dataset
 @st.cache_data
