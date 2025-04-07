@@ -3,9 +3,9 @@ import pandas as pd
 import numpy as np
 import joblib
 
-model = joblib.load("/Users/sot/SDS-CP023-diamond-price-predictor/submissions-team/Patrick-Edosoma/final_gradient_boosting_model.pkl")
-encoder = joblib.load("/Users/sot/SDS-CP023-diamond-price-predictor/submissions-team/Patrick-Edosoma/Ordinal_encoder.pkl")
-scaler = joblib.load("/Users/sot/SDS-CP023-diamond-price-predictor/submissions-team/Patrick-Edosoma/Standard_scaler.pkl")
+model = joblib.load("submissions-team/Patrick-Edosoma/final_gradient_boosting_model.pkl")
+encoder = joblib.load("submissions-team/Patrick-Edosoma/Ordinal_encoder.pkl")
+scaler = joblib.load("submissions-team/Patrick-Edosoma/Standard_scaler.pkl")
 
 st.sidebar.title("About the App")
 st.sidebar.info(
