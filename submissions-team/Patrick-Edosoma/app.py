@@ -33,7 +33,7 @@ These features work together to determine a diamond’s value. A larger diamond 
 st.markdown(" ## 💎 Welcome to Diamond Price Predictor 💎")
 
 
-st.image("/Users/sot/SDS-CP023-diamond-price-predictor/submissions-team/Patrick-Edosoma/diamond copy.png", caption="Diamond Prediction App", use_container_width=True)
+st.image("submissions-team/Patrick-Edosoma/diamond copy.png", caption="Diamond Prediction App", use_container_width=True)
 
 st.header("Enter Diamond Characteristics")
 
