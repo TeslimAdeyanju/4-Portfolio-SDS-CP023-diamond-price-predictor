@@ -58,11 +58,11 @@ if st.button("Predict"):
     }
 
     prediction_url = os.getenv('PREDICTION_API_URL')
-    response = requests.post(f'{prediction_url}/api/predictdiamondprice', json = input_data)
+    response = requests.post(f'{prediction_url}/api/predict-diamond-price', json = input_data)
 
     if response.status_code == 200:
         predicted_price = response.text
-        st.success(f'Predicted Price:${predicted_price}', icon='✔')
+        st.success(f'**Predicted Price:${predicted_price}**', icon='✔')
         rain(emoji='💰', font_size=50, falling_speed=5, animation_length='infinite')
     else:
         logging.error(f'Error response when calling api-{response.json()} '
