@@ -8,7 +8,7 @@ original_columns = ['cut', 'color', 'clarity', 'carat', 'depth', 'table', 'price
 numeric_columns = ['carat', 'depth', 'table', 'price',
                        'width', 'height', 'length']
 
-def get_data_frame() -> pd.DataFrame:
+def get_data_frame(use_volume:bool = False) -> pd.DataFrame:
 
     # Read data source file location from yaml file
     current_directory = Path(__file__).resolve().parent
@@ -51,7 +51,11 @@ def get_data_frame() -> pd.DataFrame:
     dataset['cut_encoded'] = dataset['cut'].map(cut_mapping)
     dataset['color_encoded'] = dataset['color'].map(color_mapping)
     dataset['clarity_encoded'] = dataset['clarity'].map(clarity_mapping)
+    if use_volume:
+        dataset['volume'] = dataset['width'] * dataset['height'] * dataset['length']
+        dataset.drop(columns=zero_value_columns, inplace=True, axis=1)
 
+    # print(dataset.head())
     # move price column to the end
     column_to_reorder = 'price'
     reordered_columns = [col for col in dataset.columns if col != column_to_reorder] + [column_to_reorder]

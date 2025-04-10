@@ -23,8 +23,23 @@
 13. impacts of PCA
 14. PCA is affected by outliers and also you should standardize before you apply PCA
 15. How do i decide whether I go for PCA or Kernel PCA
-     
-    
+16. Skew Limit -0.5 to 0.5 is generally acceptable 
+17. based on skew value decide whether it is normal distribution or not, based on that we need to choose the way to identify outliers
+18. Look at algorhythms that are impacted by outliers, try to apply trasnformations to see if then can reduce outliers.
+19. Below are the metrics after just removing rows with zero values and without specific hyperparameter tuning
+     | Model | R2 Train | R2 Test| RMSE Train | RMSE Test
+     | ---------- | ----------------- | ----------| ----- |
+     | price      | 3532 | 6.55 | 1.62 |
+     | carat      | 1883 | 3.49 | 1.12 |
+     | depth      | 2543 | 4.72 | -0.08 |
+     | table      | 604 | 1.12 | 0.8 |
+     | width      | 24 | 0.04 | 0.4 |
+     | height     | 29 | 0.05 | 1.58 |
+     | length      | 22 | 0.04 | 2.46 |
+20. [{'learning_rate' : [0.07, 0.08], 'iterations':[700,750], 'depth':[9,10]}]
+params_grid = [{'rsm' : [0.6, 0.8, 1]}]
+
+'depth':[9,10]}    
 
 
 

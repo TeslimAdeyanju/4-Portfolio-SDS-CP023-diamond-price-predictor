@@ -6,7 +6,6 @@ from sklearn.ensemble import RandomForestRegressor
 
 from dpputility import (data_set_module as dsm,
                         config_module as cm, metrics_module as mm)
-from dpputility.json_module import perform_tuning
 
 pd.set_option('display.max_columns', None)
 
@@ -24,7 +23,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 path_to_save = cm.get_tuning_result_file_path(os.path.abspath('../'),
                                               'random_forest_regression.json')
 
-grid_search_cv = perform_tuning(RandomForestRegressor(random_state=0), [{}],
+grid_search_cv = mm.perform_tuning(RandomForestRegressor(random_state=0), [{}],
                         X_train, y_train, path_to_save)
 
 print(mm.calculate_grid_search_cv_metrics(grid_search_cv.cv_results_))

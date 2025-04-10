@@ -34,3 +34,10 @@
 33. How do i know whether a given feature is really contributing to Model prediction or not
 34. how do i ensure my regression model is not overfitted
 35. for regression what metrics helps to find whether my model is overfitted?
+36. Outliers applies to only independent variable or does it also applies to dependent variable as well
+37. what is threshold % of outlier data we can remove from original dataset safely
+38. How to identify outliers? If variable follows normal distribution, any data beyond mean +/- 3*standard deviation is outlier. For normal distribution we can also use 5th and 95th quantile to identify outliers. If it is not normally distributed/skewed we can use IQR proximity rule 75th quantile+1.5/3IQR or 25th quantile-1.5/3IQR
+39. do we need to remove outliers before test/train split or after, if after do we just need to remove outliers from train data alone? ok you need to calculate outlier lower/upper limits based on training data alone and use that data to remove/cap outliers from both train and test data
+40. How do i mathematically know if a variable follows normal distribution
+41. difference between GPU and CPU learning
+42. Best machine learning project structure along with pickle file deployment using fast api and UI using streamlit

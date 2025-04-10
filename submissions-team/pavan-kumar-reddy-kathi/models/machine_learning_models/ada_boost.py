@@ -2,11 +2,10 @@ import os
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from xgboost import XGBRegressor
+from sklearn.ensemble import AdaBoostRegressor
 
 from dpputility import (data_set_module as dsm,
                         config_module as cm, metrics_module as mm)
-
 pd.set_option('display.max_columns', None)
 
 # Load data set
@@ -21,15 +20,15 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # Perform tuning using GridSearchCV and save results
 path_to_save = cm.get_tuning_result_file_path(os.path.abspath('../'),
-                                              'xg_boost.json')
+                                              'ada_boost.json')
 
-grid_search_cv = mm.perform_tuning(XGBRegressor(random_state=0), [{}],
+grid_search_cv = mm.perform_tuning(AdaBoostRegressor(), [{}],
                         X_train, y_train, path_to_save)
-
 print(mm.calculate_grid_search_cv_metrics(grid_search_cv.cv_results_))
+
 # Build and train model
 # Do sampling
-model = XGBRegressor(random_state=0)
+model = AdaBoostRegressor()
 # Do Sampling
 model.fit(X_train, y_train)
 
@@ -39,5 +38,3 @@ y_train_predicted = model.predict(X_train)
 
 # display model metrics
 print(mm.calculate_model_metrics(y_train, y_test, y_train_predicted, y_test_predicted, (X_test.shape[1])))
-
-

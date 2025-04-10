@@ -8,7 +8,6 @@ from sklearn.linear_model import ElasticNet
 
 from dpputility import (data_set_module as dsm,
                         metrics_module as mm, config_module as cm)
-from dpputility.json_module import perform_tuning
 
 pd.set_option('display.max_columns', None)
 
@@ -36,7 +35,7 @@ X_train = column_transformer_object.fit_transform(X_train)
 path_to_save = cm.get_tuning_result_file_path(os.path.abspath('../'),
                                               'elastic_net.json')
 
-grid_search_cv = perform_tuning(ElasticNet(), [{}],
+grid_search_cv = mm.perform_tuning(ElasticNet(), [{}],
                         X_train, y_train, path_to_save)
 
 print(mm.calculate_grid_search_cv_metrics(grid_search_cv.cv_results_))

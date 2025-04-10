@@ -1,7 +1,15 @@
 import numpy as np
 import pandas as pd
-from sklearn.metrics import r2_score, root_mean_squared_error, mean_absolute_error
+from sklearn.metrics import (r2_score, root_mean_squared_error,
+                             mean_absolute_error, make_scorer)
 import re
+from typing import Any
+import json
+
+from sklearn.model_selection import KFold, GridSearchCV
+
+from dpputility.json_module import NumpyEncoder
+
 
 def calculate_model_metrics(y_train:np.ndarray, y_test:np.ndarray,
                             y_train_predicted:np.ndarray, y_test_predicted:np.ndarray,
@@ -116,5 +124,34 @@ def get_values(pattern:str, results:dict) -> list:
     keys = get_matching_keys(pattern, results)
     return [results[key][0] for key in keys]
 
+def perform_tuning(model: Any, param_grid: dict | list,
+                        X:np.ndarray, y:np.ndarray, path_to_save:str,
+                   n_splits:int=10)->GridSearchCV:
+    """
+    Performs hyperparameter tuning and saves results as json file at :path_to_save
+    :param model: Model to fit
+    :param param_grid: Hyperparameters to tune
+    :param X: Matrix of features
+    :param y: Dependent variable vector
+    :param path_to_save: Location where tuning results saved
+    :param n_splits: Number of folds. Must be at least 2. Default value 10.
+    :return: Instance of GridSearchCV
+    """
 
+    scores_dictionary = {'r2': make_scorer(r2_score),
+                         'rmse': make_scorer(root_mean_squared_error),
+                         'mae': make_scorer(mean_absolute_error)}
+
+    k_fold = KFold(n_splits=10, shuffle=True)
+    grid_search = GridSearchCV(estimator=model, param_grid=param_grid,
+                               cv=k_fold, scoring=scores_dictionary,
+                               return_train_score=True, verbose=False,
+                               refit='rmse', n_jobs=-1)
+
+    grid_search.fit(X, y)
+
+    with open(path_to_save, "w") as file:
+        json.dump(grid_search.cv_results_, file, indent=4, cls=NumpyEncoder)
+
+    return grid_search
 

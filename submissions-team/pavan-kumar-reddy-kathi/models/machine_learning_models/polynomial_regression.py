@@ -7,7 +7,6 @@ from sklearn.preprocessing import StandardScaler, PolynomialFeatures
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 
-from dpputility.json_module import perform_tuning
 from dpputility import (data_set_module as dsm,
                         config_module as cm, metrics_module as mm)
 
@@ -42,7 +41,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0, test_s
 path_to_save = cm.get_tuning_result_file_path(os.path.abspath('../'),
                                               'polynomial_regression.json')
 
-grid_search_cv = perform_tuning(get_polynomial_pipeline(), [{}],
+grid_search_cv = mm.perform_tuning(get_polynomial_pipeline(), [{}],
                         X_train, y_train, path_to_save)
 
 print(mm.calculate_grid_search_cv_metrics(grid_search_cv.cv_results_))
