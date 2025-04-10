@@ -4,15 +4,18 @@ import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.staticfiles import StaticFiles
-from pathlib import Path
+import os
 
 
 # Instantiate FastAPI
 app = FastAPI(title='Diamond Price Predictor',
               description='API to predict diamond price based on its features',
               version='1.0.0')
+
 # app.mount("/model",StaticFiles(directory="model"), name="model")
-model = joblib.load(Path(".\\model\\prediction_model.pkl"))
+# model = joblib.load(Path(".\\model\\prediction_model.pkl"))
+
+model = joblib.load(os.path.join(os.path.dirname(__file__),'model','prediction_model.pkl'))
 # Input request/payload structure
 class DiamondFeatures(BaseModel):
     cut:int
