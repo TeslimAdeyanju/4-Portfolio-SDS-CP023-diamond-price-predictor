@@ -3,6 +3,12 @@ import os.path
 import yaml
 
 def read_config_setting(key: str) -> str:
+    """
+    Reads config value corresponding to input key from app_config.yaml
+    :param key: Key
+    :return: Config value from app_config.yaml corresponding to input key
+    """
+
     # Read data source file location from yaml file
     current_directory = Path(__file__).resolve().parent
     parent_directory = current_directory.parent.parent

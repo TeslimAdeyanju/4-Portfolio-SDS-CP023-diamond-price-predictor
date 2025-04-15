@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 import joblib
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -22,13 +23,13 @@ y = dataset.iloc[:,-1].values
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
 # Perform tuning using GridSearchCV and save results
-# path_to_save = cm.get_tuning_result_file_path(os.path.abspath('../'),
-#                                               'light_gbm.json')
-#
-# grid_search_cv = mm.perform_tuning(LGBMRegressor(verbosity=-1), [{}],
-#                         X_train, y_train, path_to_save)
-#
-# print(mm.calculate_grid_search_cv_metrics(grid_search_cv.cv_results_))
+path_to_save = cm.get_tuning_result_file_path(os.path.abspath('../'),
+                                              'light_gbm.json')
+
+grid_search_cv = mm.perform_tuning(LGBMRegressor(verbosity=-1), [{}],
+                        X_train, y_train, path_to_save)
+
+print(mm.calculate_grid_search_cv_metrics(grid_search_cv.cv_results_))
 
 # Build and train model
 # Do sampling
@@ -40,15 +41,17 @@ model.fit(X_train, y_train)
 y_test_predicted = model.predict(X_test)
 y_train_predicted = model.predict(X_train)
 
+# display model metrics
+print(mm.calculate_model_metrics(y_train, y_test, y_train_predicted, y_test_predicted, (X_test.shape[1])))
+
+# save the model
 root_directory = Path.cwd().parent.parent
 relative_path = 'api/prediction_model.pkl'
 final_path = root_directory/relative_path
-# save the model
+
 with open(final_path, 'wb') as file:
     joblib.dump(model,file)
 
-# display model metrics
-# print(mm.calculate_model_metrics(y_train, y_test, y_train_predicted, y_test_predicted, (X_test.shape[1])))
 
 
 

@@ -1,14 +1,13 @@
 import optuna
-# import optuna.integration.lightgbm  as lgb
-# from sklearn.metrics import root_mean_squared_error
-# from lightgbm import early_stopping, log_evaluation
-
 import pandas as pd
-from sklearn.model_selection import train_test_split, KFold
-from tensorflow.python.ops.metrics_impl import root_mean_squared_error
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import root_mean_squared_error
+from lightgbm import LGBMRegressor
 
 from dpputility import data_set_module as dsm
-from lightgbm import LGBMRegressor
+
+# Hyper tuning parameter didn't result in any significant improvement in RMSE
+
 pd.set_option('display.max_columns', None)
 
 # Load data set
@@ -52,28 +51,3 @@ print(study.best_params)
 
 
 
-# train_data = lgb.Dataset(X, label = y, feature_name=['carat','depth','table','width','height',
-#                                                      'length','cut_encoded','color_encoded',
-#                                                      'clarity_encoded'])
-# # valid_data = lgb.Dataset(X_test, label = y_test)
-#
-#
-# params = {
-#     'objective' : 'regression',
-#     'metric' : 'rmse',
-#     'verbosity' : -1,
-#     'boosting_type' : 'gbdt'
-#     # Stop if no improvement for 50 rounds
-#     # "early_stopping_rounds":50
-# }
-#
-# tuner = lgb.LightGBMTunerCV(
-#     params,
-#     train_data,
-#     folds=KFold(n_splits=10, shuffle=True)
-#     # callbacks=[early_stopping(100), log_evaluation(100)],
-# )
-#
-# tuner.run()
-# print(tuner.best_params)
-# print(tuner.best_score)

@@ -57,6 +57,7 @@ streamlit~=1.44.1
 streamlit_extras
 dotenv~=0.9.9
 python-dotenv~=1.1.0
+logging
 numpy~=1.26.4
 uvicorn~=0.34.0
 fastapi~=0.115.12

@@ -4,11 +4,10 @@ from dpputility.data_set_module import get_data_frame
 from dpputility.plot_module import create_reg_plot
 from dpputility.config_module import read_config_setting
 
+# Load dataset
 dataset = get_data_frame()
 
-# ['cut', 'color', 'clarity', 'carat', 'depth', 'table', 'price',
-#                        'width', 'height', 'length', 'cut_encoded']
-
+# Path to Save Regression Plots
 root_path = os.path.abspath('../../')
 folder_path = read_config_setting('regression_plots_folder')
 folder_to_save = os.path.join(root_path,folder_path)

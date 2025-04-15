@@ -1,11 +1,18 @@
 import os
-from typing import LiteralString
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 
 def create_reg_plot(dataset:pd.DataFrame, x_column:str, y_column:str,
                    folder_to_save:str):
+    """
+    Creates regression plots
+    :param dataset: DataFrame with input data
+    :param x_column: Column for X axis
+    :param y_column: Column for Y axis
+    :param folder_to_save: Location to which Regression plot is saved.
+    :return: void
+    """
     plt.figure(figsize=(8, 6))
 
     sns.regplot(data=dataset, x=x_column, y=y_column, ci=95,

@@ -142,7 +142,7 @@ def perform_tuning(model: Any, param_grid: dict | list,
                          'rmse': make_scorer(root_mean_squared_error),
                          'mae': make_scorer(mean_absolute_error)}
 
-    k_fold = KFold(n_splits=10, shuffle=True)
+    k_fold = KFold(n_splits=n_splits, shuffle=True)
     grid_search = GridSearchCV(estimator=model, param_grid=param_grid,
                                cv=k_fold, scoring=scores_dictionary,
                                return_train_score=True, verbose=False,

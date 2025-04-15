@@ -1,20 +1,15 @@
-import  os
-
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import root_mean_squared_error
 from catboost import CatBoostRegressor
 import optuna
 
-from dpputility import (data_set_module as dsm,
-                        config_module as cm, metrics_module as mm)
+from dpputility import data_set_module as dsm
 
-# Hyper tuning parameter doesn't result in any significant improvement,
+# Hyper tuning parameter didn't result in any significant improvement,
 # either in R2 score or reduction in Test set RMSE, without raising
 # in difference between Train and Test RMSE values.
 # Hence, sticking to default model parameters.
-
-
 
 pd.set_option('display.max_columns', None)
 
