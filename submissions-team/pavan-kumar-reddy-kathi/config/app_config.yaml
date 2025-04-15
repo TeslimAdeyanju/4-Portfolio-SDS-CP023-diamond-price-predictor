@@ -3,3 +3,4 @@ settings:
   regression_plots_folder: "docs\\Regression_Plots"
   kde_hist_plots_folder: "docs\\kde_hist_bar_plots"
   correlation_plots_folder: "docs\\correlation_plots"
+  grid_search_cv_un_tuned: "GridSearchCV\\Untuned"

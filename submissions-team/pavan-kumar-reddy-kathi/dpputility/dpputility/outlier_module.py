@@ -1,18 +1,17 @@
-import pandas
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy.stats import skew
 
-def analyze_and_remove_outliers_iqr(df, column):
+def analyze_and_cap_outliers_iqr(df, column):
     """
-    Analyze, visualize, and remove outliers from a dataframe column using the IQR method.
+    Analyze, visualize, and cap outliers from a dataframe column using the IQR method.
 
     Parameters:
     df (pandas.DataFrame): Input dataframe
-    column (str): Name of the column to remove outliers from
+    column (str): Name of the column to cap outliers
 
     Returns:
-    pandas.DataFrame: Dataframe with outliers removed/capped
+    pandas.DataFrame: Dataframe with outliers capped
     """
     # Create a copy of the dataframe
     df_clean = df.copy()

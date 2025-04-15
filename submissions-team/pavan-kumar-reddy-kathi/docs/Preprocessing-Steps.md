@@ -15,3 +15,4 @@
 12. 
 13. 
 14. Identify Correlation between feature and target variable
+15. calculate R2, Adjusted R2, RMSE and AIC/BIC Values along with Cross Validation

@@ -1,35 +1,26 @@
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy.stats import skew
+
 import os
 from dpputility import  data_set_module as dsm, config_module as cm
 
 # Load data set
 dataset = dsm.get_data_frame()
-# print(dataset.columns)
 
+# Skew ranges
+# 0.5 - 1.0 Moderately Positive
+# > 1 Highly Positive
+# -0.5 - -1 Moderately Negative
+# < -1 Highly Negative
+# Acceptable -1 to 1
 
-
-
-# calculate skew
-# 0.5 - 1.0 Moderately positive
-# > 1 highly positive
-# -0.5 - -1 moderately negative
-# < -1 highly negative
-# print(skew(dataset['carat'])) # highly skewed -1.1166148681277792 not acceptable (-0.5 to 1.5)
-# print(skew(dataset['depth'])) # -0.0822917377962474 acceptable (-0.5 to 0.5)
-# print(skew(dataset['table'])) #0.7968736878796613 not acceptable value (-0.5 to 0.5)
-# acceptable -1 to 1
-# print(skew(dataset['width'])) #0.3786658120772073
-# print(skew(dataset['height'])) # 1.5223802221853744
-# print(skew(dataset['length'])) # 2.434099025011364
-# print(skew(dataset['price'])) #1.6183502776053016
-
-# draw histograms to confirm
+# Draw histograms to confirm skew presence
 numeric_columns = ['carat', 'depth', 'table', 'price',
        'width', 'height', 'length']
+
+# Path to save hist plots
 root_path = os.path.abspath('../../') #'../../docs'
 folder_path = cm.read_config_setting('kde_hist_plots_folder')
 folder_to_save = os.path.join(root_path, folder_path)

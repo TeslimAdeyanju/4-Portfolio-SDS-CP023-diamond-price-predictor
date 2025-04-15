@@ -6,29 +6,26 @@ from dpputility.data_set_module import get_data_frame
 from dpputility.config_module import read_config_setting
 import pandas as pd
 
+# Reference ranges for Correlation
+# 0.9-1 very strong
+# 07-.9 strong
+# 0.5-0.7 moderate
+# 0.3-0.5 weak
+# 0-0.3 very weak or no linear Correlation
+
+
 pd.options.display.max_columns = None
-pd.set_option('display.max_rows',None)
 
 dataset = get_data_frame()
+
 # select only numeric columns
 filter_columns = ['cut_encoded', 'color_encoded', 'clarity_encoded', 'carat', 'depth', 'table', 'price',
                        'width', 'height', 'length']
 filter_dataset = dataset[filter_columns]
 
-# Capture correlations between columns
-# Pearson Correlation (default) --Linear correlations
-# pearson_corr = filter_dataset.corr()
-# print(pearson_corr)
-
-# Spearman's Rank Correlation - nonlinear relationships, ordinal data non normally distributed continuous data
-# spearman_rank_correlation = filter_dataset.corr(method='spearman')
-# print(spearman_rank_correlation)
-
-# Kendall's Tau - Small sample sizes , ordinal data,  data with Ties
-# kendall_correlation = filter_dataset.corr(method='kendall')
-# print(kendall_correlation)
-
 correlation_method = ['pearson', 'spearman', 'kendall']
+
+# Path to Save heatmaps
 root_path = os.path.abspath('../../')
 folder_path = os.path.join(root_path,read_config_setting('correlation_plots_folder'))
 
