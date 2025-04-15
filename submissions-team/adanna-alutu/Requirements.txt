@@ -1,0 +1,6 @@
+numpy==1.26.4 #numpy version  1.26.4
+pandas==2.1.4 #pandas version  2.1.4
+matplotlib==3.7.1 #matplotlib version  3.7.1
+sns==0.13.1 #sns version  0.13.1
+joblib
+streamlit
