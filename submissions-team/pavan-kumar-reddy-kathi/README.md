@@ -85,7 +85,7 @@ Source to Dataset: https://www.kaggle.com/datasets/willianoliveiragibin/type-of-
 ## Usage
 * After setting up of FastAPI and StreamLit applications you can evaluate model performance by entering Diamond features and trying to predict Price for those input features.
 * You can test FastAPI and StreamLit applications at below urls as well.
-    * FastAPI-https://sds-cp023-diamond-price-predictor-bfar.onrender.com/
+    * FastAPI-https://sds-cp023-diamond-price-predictor-bfar.onrender.com/docs
     * Streamlit App - https://sds-cp023-diamond-price-predictor-ui.onrender.com/
 
 ## Contact Information
